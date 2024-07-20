@@ -27,6 +27,18 @@ class fractional_knapsack implements Comparator<fractional_knapsack.Item> {
 
         double maxProfit = 0;
         int n = items.length;
+
+        /*
+         * Modified Condition (capacity >= 0):
+         * 
+         * This condition simply checks if there is any remaining capacity (even if it
+         * is less than the weight of the current item).
+         * It does not ensure that the current item can be fully included. This causes
+         * the algorithm to incorrectly subtract the item's weight from the capacity,
+         * even when the capacity is insufficient to include the entire item.
+         * This logic leads to the inclusion of more items than the remaining capacity
+         * allows, resulting in incorrect calculations and different outputs.
+         */
         for (int i = 0; i < n; i++) {
             if (capacity - items[i].weight >= 0) {
                 capacity -= items[i].weight;
